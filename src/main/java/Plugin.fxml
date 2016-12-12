@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="140.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="workTimePane" visible="false" layoutX="5.0" layoutY="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ProgressBar fx:id="todayProgress" layoutX="7.0" layoutY="25.0" prefHeight="20.0" prefWidth="354.0" progress="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="24.0" prefHeight="20.0" prefWidth="200.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+               <children>
+                  <Label fx:id="lblTodayWorkTime" alignment="CENTER" text="0시간 0분" />
+                  <Label alignment="CENTER" text="/8시간 0분" />
+               </children>
+            </HBox>
+            <ProgressBar fx:id="weekProgress" layoutX="7.0" layoutY="50.0" prefHeight="20.0" prefWidth="354.0" progress="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" />
+            <HBox alignment="CENTER" layoutX="7.0" layoutY="49.0" prefHeight="20.0" prefWidth="200.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+               <children>
+                  <Label fx:id="lblWeekWorkTime" alignment="CENTER" text="0시간 0분" />
+                  <Label alignment="CENTER" text="/40시간 0분" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="47.0" layoutY="80.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+               <children>
+                  <VBox alignment="CENTER" layoutX="47.0" layoutY="68.0" spacing="5.0">
+                     <children>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXCheckBox fx:id="chkCheckIn" checkedColor="#59bf53" disable="true" layoutX="47.0" layoutY="79.0" text=" ">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </JFXCheckBox>
+                              <Button fx:id="btnCheckIn" focusTraversable="false" mnemonicParsing="false" text="출근 체크" onAction="#checkIn">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <JFXCheckBox fx:id="chkCheckOut" checkedColor="#59bf53" disable="true" layoutX="47.0" layoutY="108.0" text=" ">
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </JFXCheckBox>
+                              <Button fx:id="btnCheckOut" focusTraversable="false" mnemonicParsing="false" text="퇴근 체크" onAction="#checkOut" />
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="174.0" layoutY="79.0" spacing="12.0">
+                     <children>
+                        <Label fx:id="lblCheckIn" focusTraversable="false" layoutX="174.0" layoutY="79.0" text="출근 이력이 없습니다.">
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="lblCheckOut" focusTraversable="false" layoutX="174.0" layoutY="108.0" text="퇴근 이력이 없습니다.">
+                           <padding>
+                              <Insets left="15.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="318.0" layoutY="2.0" spacing="5.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0">
+               <children>
+                  <Label fx:id="lblEmpInfo" focusTraversable="false" text="홍길동(30000)" underline="true" />
+                  <Hyperlink focusTraversable="false" layoutX="317.0" layoutY="2.0" onAction="#load" text="새로 고침" underline="true" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+               </children>
+            </HBox>
+            <Label fx:id="lblDateTime" focusTraversable="false" layoutX="237.0" layoutY="5.0" text="yyyy-mm-dd" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+               <font>
+                  <Font name="Verdana Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <BorderPane fx:id="failurePane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="lblFailure" text="" />
+                  <Hyperlink onAction="#load" text="다시 시도" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="loadingPane" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <JFXSpinner radius="15.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
